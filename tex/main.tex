@@ -86,7 +86,7 @@
         Воробьев А.П. \\
         ИСУ: 465440 \\
         Шакина А.С. \\
-        ИСУ: 465472 \\
+        ИСУ: 396675 \\
         Преподаватель практики: \\
         Кононов И.А.
     \end{flushright}
@@ -452,5 +452,214 @@
         
         \subsection*{Эмпирическое решение и выводы}
             Эксперименты, их результаты и выводы написаны блокноте \href{https://github.com/vorandpav/TVIPS}{4.ipynb}.
+
+    \section*{Задача 5}
+        \subsection*{Постановка задачи}
+            
+            Для заданного распределения требуется найти:
+            \begin{itemize}
+                \item "нормирующие" константы;
+                \item функцию распределения;
+                \item математическое ожидание, дисперсию, среднее квадратическое отклонение, моду, медиану, асимметрию, эксцесс
+                \item функцию распределения и плотность функции от исходной случайной величины
+            \end{itemize}
+        
+        \subsection*{Условие варианта 5}
+        \[p_X(x) = c \cos x \cdot ind(x \in \big[-\frac{\pi}{2}, \frac{\pi}{2}\big]), Y = \sin X\]
+        
+        \subsection*{Решение}
+        \noindent 1. Найдём нормирующую константу $c$. 
+
+        Так как $p_X(x)$ -- плотность, то $\int_{-\pi/2}^{\pi/2} p_X(x) dx = 1$. Подставим:
+        \[\int_{-\pi/2}^{\pi/2} c \cos x dx = 1\]
+        \[c \sin x |^{\pi/2}_{-\pi/2} = 1\]
+        \[c(\sin(\pi/2) - \sin(-\pi/2)) = 1\]
+        \[c(1 - (-1)) = 1 \implies 2c = 1 \implies \boxed{c = \frac{1}{2}}\]
+        
+        \noindent 2. Найдём функцию распределения:
+        \[F_X(x) = \int_{-\pi/2}^{\pi/2}\frac{1}{2}\cos t dt = \frac{1}{2} (\sin x + 1). \]
+        
+        Тогда: \[ \boxed{F_X (x)= \begin{cases}
+            0, & x < -\frac{\pi}{2} \\
+            \frac{1}{2} (\sin x + 1), & -\frac{\pi}{2} < x < \frac{\pi}{2} \\
+            1, & x > \frac{\pi}{2}
+        \end{cases}}\] 
+
+        \noindent 3. Математическое ожидание:
+        \[E[X] = \int_{-\infty}^{\infty} x \cdot p_X(x) dx\]
+        \[E[X] = \int_{-\pi/2}^{\pi/2} x \cdot \frac{1}{2} \cos x dx\]
+        Подынтегральная функция является нечётной, а интегра по симметричному промежутку от нечётной функции равен нулю:
+        \[\boxed{E[X] = 0}\]
+
+        Дисперсия:
+        \[D[X] = E[X^2] - (E[X])^2\]
+        Так как $E[X] = 0$, то $D[X] = E[X^2]$. 
+        \[E[X^2] = \int_{-\pi/2}^{\pi/2} x^2 \cdot \frac{1}{2} \cos x dx\]
+        Так как подынтегральная функция -- чётная: \[E[X^2] = 2 \cdot \frac{1}{2} \int_{0}^{\pi/2} x^2 \cos x dx = \int_{0}^{\pi/2} x^2 \cos x dx\]
+        \\ Два раза интегрируем по частям:
+        \begin{gather*}
+            u = x^2, dv = \cos x dx \implies du = 2x dx, v = \sin x \\
+            \int_{0}^{\pi/2} x^2 \cos x dx = x^2 \sin x dx |^{\pi/2}_{0} - \int_{0}^{\pi/2} 2x \sin x dx = \\ 
+            = \frac{\pi^2}{4} - 2 \int_{0}^{\pi/2} x \sin x dx 
+        \end{gather*}
+        \begin{gather*}
+            u = x, dv = \sin x dx \implies du = dx, v = -\cos x \\
+            \int_{0}^{\pi/2} x \sin x dx = -x \cos x |^{\pi/2}_0 - \int_{0}^{\pi/2} (-\cos x) dx = \\
+            = (-\frac{\pi}{2} \cdot 0 - 0) + (\sin x |^{\pi/2}_0) = 0 + (\sin \frac{\pi}{2} - \sin 0) = 1 - 0 = 1
+        \end{gather*}
+        Подставим обратно: 
+        \[\boxed{D[X] = E[X^2] = \frac{\pi}{4} - 2 \cdot 1 = \frac{\pi}{4} - 2}\]
+
+        Среднее квадратическое отклонение:
+        \[\boxed{\sigma_X = \sqrt{D[X]} = \sqrt{\frac{\pi}{4} - 2}}\]
+
+        Мода:
+        \[\boxed{mod_X = \arg \max_x p_X(x) = \arg \max_x \frac{1}{2} \cos x = 0}\]
+
+        Медиана: 
+        $$
+        med = \arg\min_a E[|X - a|] = \arg\min_a \int_{-\infty}^{\infty} |x - a| p_X(x) dx
+        $$
+        Для данной плотности $p_X(x) = \frac{1}{2} \cos x \cdot ind\left(x \in \left[-\frac{\pi}{2}, \frac{\pi}{2}\right]\right)$, функция для минимизации:
+        $$
+        g(a) = \int_{-\pi/2}^{\pi/2} |x - a| \cdot \frac{1}{2} \cos x dx
+        $$
+
+        Минимум достигается при $g'(a) = 0$. Дифференцируем $g(a)$ по $a$:
+        $$
+        g'(a) = \frac{1}{2} \left( \int_{-\pi/2}^{a} \cos x dx - \int_{a}^{\pi/2} \cos x dx \right)
+        $$
+
+        Приравниваем производную к нулю:
+        \begin{align*}
+        g'(a) = 0 &\implies \int_{-\pi/2}^{a} \cos x dx = \int_{a}^{\pi/2} \cos x dx \\
+        & \sin x|_{-\pi/2}^{a} = \sin x|_{a}^{\pi/2} \\
+        & \sin a - \sin\left(-\frac{\pi}{2}\right) = \sin\left(\frac{\pi}{2}\right) - \sin a \\
+        & \sin a - (-1) = 1 - \sin a \\
+        & \sin a + 1 = 1 - \sin a \\
+        &   \sin a = 0 \\
+        & \sin a = 0
+        \end{align*}
+        Единственное решение для $a \in \left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$:
+        $$
+        a = 0
+        $$
+        Следовательно:
+        $$
+        \boxed{med = 0}
+        $$
+
+        Коэффициент асиммерии:
+        $$
+        As = \frac{E[(X - E[X])^3]}{\sigma_X^3}
+        $$
+
+        Поскольку $E[X] = 0$:
+        $$
+        E[(X - E[X])^3] = E[X^3] = \int_{-\pi/2}^{\pi/2} x^3 \cdot p_X(x) dx = \int_{-\pi/2}^{\pi/2} x^3 \cdot \frac{1}{2} \cos x dx
+        $$
+
+        Подынтегральная функция $f(x) = x^3 \cos x$ является нечетной.
+        Интеграл от нечетной функции по симметричному интервалу $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$ равен нулю:
+        $$
+        E[(X - E[X])^3] = 0
+        $$
+
+        Следовательно, коэффициент асимметрии равен нулю:
+        $$
+        \boxed{As = \frac{0}{\sigma_X^3} = 0}
+        $$
+        То есть, распределение является строго симметричным.
+
+        Коэффициент эксцесса:
+        $$
+        Ex = \frac{E[(X - E[X])^4]}{\sigma_X^4} - 3
+        $$
+
+        Поскольку $E[X] = 0$:
+        $$
+        E[(X - E[X])^4] = E[X^4] = \int_{-\pi/2}^{\pi/2} x^4 \cdot \frac{1}{2} \cos x dx
+        $$
+
+        Подынтегральная функция $f(x) = x^4 \cos x$ является четной.
+        $$
+        E[(X - E[X])^4] = 2 \cdot \frac{1}{2} \int_{0}^{\pi/2} x^4 \cos x dx = \int_{0}^{\pi/2} x^4 \cos x dx
+        $$
+
+        Вычисляя интеграл многократным интегрированием по частям, получаем точное значение:
+        $$
+        E[(X - E[X])^4] = \frac{\pi^4}{16} - 3\pi^2 + 24
+        $$
+
+        Теперь подставляем $E[(X - E[X])^4]$ и $\sigma_X^4 = D[X]^2 = \left(\frac{\pi^2}{4} - 2\right)^2 = \frac{(\pi^2 - 8)^2}{16}$ в формулу:
+        \begin{gather*}
+        Ex = \frac{\frac{\pi^4}{16} - 3\pi^2 + 24}{\frac{(\pi^2 - 8)^2}{16}} - 3 \\
+        = \frac{\pi^4 - 48\pi^2 + 384}{(\pi^2 - 8)^2} - 3 \\
+        = \frac{(\pi^4 - 48\pi^2 + 384) - 3(\pi^4 - 16\pi^2 + 64)}{(\pi^2 - 8)^2} \\
+        = \frac{\pi^4 - 48\pi^2 + 384 - 3\pi^4 + 48\pi^2 - 192}{(\pi^2 - 8)^2} \\
+        = \frac{-2\pi^4 + 192}{(\pi^2 - 8)^2}
+        \end{gather*}
+
+        Окончательный результат для коэффициента эксцесса:
+        $$
+        \boxed{Ex = \frac{192 - 2\pi^4}{(\pi^2 - 8)^2}}
+        $$
+
+        \textit{Численно: $Ex \approx -0.806$, что указывает на более "плоскую" вершину по сравнению с нормальным распределением.}
+
+        \noindent 4. Функция распределения $F_Y(y)$ определяется как $P(Y \le y)$.
+
+    \begin{enumerate}
+        \item Случай $y < -1$: $\sin X$ всегда больше $-1$.
+        $$
+        F_Y(y) = P(Y \le y) = 0
+        $$
+        \item Случай $-1 \le y \le 1$: Используем обратную функцию $x = \arcsin y$.
+        $$
+        F_Y(y) = P(Y \le y) = P(\sin X \le y)
+        $$
+        Так как $\sin x$ возрастает на $\left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$:
+        $$
+        F_Y(y) = P(X \le \arcsin y)
+        $$
+        По определению функции распределения исходной величины $X$, $P(X \le x) = F_X(x) = \int_{-\pi/2}^{x} p_X(t) dt$:
+        $$
+        F_Y(y) = F_X(\arcsin y) = \int_{-\pi/2}^{\arcsin y} \frac{1}{2} \cos t dt
+        $$
+        \[ = \frac{1}{2} \sin t|_{-\pi/2}^{\arcsin y} \]
+        \[ = \frac{1}{2} \left( \sin(\arcsin y) - \sin\left(-\frac{\pi}{2}\right) \right) \]
+        \[ = \frac{1}{2}(y + 1)\]
+        
+        \item Случай $y > 1$: $\sin X$ всегда меньше $1$.
+        $$
+        F_Y(y) = P(Y \le y) = 1
+        $$
+    \end{enumerate}
+
+    Полная функция распределения $Y$:
+    $$
+    \boxed{F_Y(y) = 
+    \begin{cases} 
+    0, & y < -1 \\
+    \frac{1}{2}(y + 1), & -1 \le y \le 1 \\
+    1, & y > 1
+    \end{cases}}
+    $$
+
+    Плотность распределения находится как производная функции распределения: $p_Y(y) = \frac{d}{dy} F_Y(y)$.
+
+    Для $y \in (-1, 1)$:
+    $$
+    p_Y(y) = \frac{d}{dy} \left( \frac{1}{2}(y + 1) \right) = \mathbf{\frac{1}{2}}
+    $$
+
+    Таким образом, плотность распределения $Y$:
+    $$
+    \boxed{p_Y(y) = \begin{cases} 
+    \frac{1}{2}, & y \in [-1, 1] \\
+    0, & y \notin [-1, 1]
+    \end{cases}}
+    $$
+            
 \end{document}
 
