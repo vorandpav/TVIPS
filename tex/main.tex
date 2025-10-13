@@ -473,7 +473,7 @@
             \end{itemize}
         
         \subsection*{Условие варианта 5}
-        \[p_X(x) = c \cos x \cdot ind(x \in \big[-\frac{\pi}{2}, \frac{\pi}{2}\big]), Y = \sin X\]
+        \[p_X(x) = c \cos x \cdot \mathrm{ind}(x \in \big[-\frac{\pi}{2}, \frac{\pi}{2}\big]), Y = \sin X\]
         
         \subsection*{Решение}
         \noindent 1. Найдём нормирующую константу $c$. 
@@ -668,6 +668,102 @@
     0, & y \notin [-1, 1]
     \end{cases}}
     $$
+
+    \phantomsection
+    \addcontentsline{toc}{section}{Задача 6}
+    \section*{Задача 6}
+    \subsection*{Постановка задачи}
+    Пусть случайная величина $R$ имеет распределение Рэлея, то есть распределение с плотностью 
+    \[f(x) = \frac{x}{\sigma^2} \exp \{- \frac{x^2}{2\sigma^2}\} \mathrm{ind}(X \ge 0),\]
+    где $\sigma > 0$ -- масштабирующий параметр, и пусть $\theta \sim  U[0, 2\pi]$. 
+    Показать, что величины $X = R\cos\theta$ и $Y = R\sin\theta$ независимы и распределены нормально с нулевым математическим ожиданием и дисперсией $\sigma^2$, если $R$ и $\Theta$ независимы.
+    \subsection*{Решение}
+
+    Так как $R$ и $\Theta$ независимы, имеем:
+    \[
+    p_{R,\Theta}(r,\theta) = f_R(r) \cdot \frac{1}{2\pi}
+    = \frac{1}{2\pi} \cdot \frac{r}{\sigma^2} \exp\left(-\frac{r^2}{2\sigma^2}\right),
+    \qquad r \ge 0, \ \theta \in [0, 2\pi).
+    \]
+
+
+    Переход к $(X,Y)$.
+
+    Пусть
+    \[
+    x = r\cos\theta, \qquad y = r\sin\theta.
+    \]
+    Тогда обратное преобразование задаётся формулами:
+    \[
+    r = \sqrt{x^2 + y^2}, \qquad 
+    \theta = 
+    \begin{cases}
+    \arccos\!\left(\dfrac{x}{\sqrt{x^2+y^2}}\right), & y \ge 0,\\[1em]
+    2\pi - \arccos\!\left(\dfrac{x}{\sqrt{x^2+y^2}}\right), & y < 0.
+    \end{cases}
+    \]
+    Якобиан перехода $(r,\theta) \mapsto (x,y)$ равен $|\det D| = r$, поэтому
+    для обратного преобразования $(x,y) \mapsto (r,\theta)$ имеем
+    \[
+    \big|\det Dg^{-1}(x,y)\big| = \frac{1}{r}.
+    \]
+
+    По формуле:
+    \[
+    p_{X,Y}(x,y) = p_{R,\Theta}(r(x,y), \theta(x,y)) \cdot \left|\det Dg^{-1}(x,y)\right|.
+    \]
+
+    Подставим $r = \sqrt{x^2 + y^2}$:
+    \[
+    \begin{aligned}
+    p_{X,Y}(x,y)
+    &= \frac{1}{2\pi} \cdot \frac{r}{\sigma^2} \exp\!\left(-\frac{r^2}{2\sigma^2}\right) \cdot \frac{1}{r} \\
+    &= \frac{1}{2\pi\sigma^2} \exp\!\left(-\frac{r^2}{2\sigma^2}\right)
+    = \frac{1}{2\pi\sigma^2} \exp\!\left(-\frac{x^2 + y^2}{2\sigma^2}\right),
+    \end{aligned}
+    \]
+    для всех $(x,y) \in R^2$.
+    \[
+    \begin{aligned}
+    p_X(x)
+    &= \int_{-\infty}^{+\infty} p_{X,Y}(x,y)\,dy
+    = \int_{-\infty}^{+\infty} \frac{1}{2\pi\sigma^2}
+    \exp\!\left(-\frac{x^2+y^2}{2\sigma^2}\right) dy \\
+    &= \frac{1}{2\pi\sigma^2} e^{-x^2/(2\sigma^2)} 
+    \int_{-\infty}^{+\infty} e^{-y^2/(2\sigma^2)} dy \\
+    &= \frac{1}{2\pi\sigma^2} e^{-x^2/(2\sigma^2)} \cdot \sqrt{2\pi}\sigma
+    = \frac{1}{\sqrt{2\pi}\sigma} e^{-x^2/(2\sigma^2)}.
+    \end{aligned}
+    \]
+
+    Аналогично,
+    \[
+    p_Y(y) = \frac{1}{\sqrt{2\pi}\sigma} e^{-y^2/(2\sigma^2)}.
+    \]
+
+    Тогда
+    \[
+    p_{X,Y}(x,y)
+    = \frac{1}{2\pi\sigma^2} e^{-(x^2+y^2)/(2\sigma^2)}
+    = p_X(x) \, p_Y(y).
+    \]
+
+    Следовательно, $X$ и $Y$ независимы.
+
+    Из вида маргинальных плотностей следует:
+    \[
+    X \text{ имеет плотность } 
+    p_X(x)=\frac{1}{\sqrt{2\pi}\sigma} e^{-x^2/(2\sigma^2)},\]
+    \[
+    Y \text{ имеет плотность } 
+    p_Y(y)=\frac{1}{\sqrt{2\pi}\sigma} e^{-y^2/(2\sigma^2)}.
+    \]
+    Следовательно,
+    \[
+    E[X] = E[Y] = 0, \qquad 
+    \operatorname{Var}(X) = \operatorname{Var}(Y) = \sigma^2.
+    \]
+
 
     \phantomsection
     \addcontentsline{toc}{section}{Задача 7}
