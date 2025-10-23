@@ -744,7 +744,7 @@
         
         \subsection*{Решение}
             
-            Так как $R$ и $\Theta$ независимы, имеем:
+            По условию \(R\) имеет распределение Рэлея и \(\Theta\sim U[0,2\pi]\), независимы, поэтому
             \[
                 p_{R,\Theta}(r,\theta) = f_R(r) \cdot \frac{1}{2\pi}
                 = \frac{1}{2\pi} \cdot \frac{r}{\sigma^2} \exp\left(-\frac{r^2}{2\sigma^2}\right),
@@ -760,34 +760,46 @@
             \]
             Тогда обратное преобразование задаётся формулами:
             \[
-                r = \sqrt{x^2 + y^2}, \qquad
-                \theta =
-                \begin{cases}
-                    \arccos\!\left(\dfrac{x}{\sqrt{x^2+y^2}}\right), & y \ge 0,\\[1em]
-                    2\pi - \arccos\!\left(\dfrac{x}{\sqrt{x^2+y^2}}\right), & y < 0.
-                \end{cases}
+                r = \sqrt{x^2 + y^2},
+                \qquad
+                \theta = \arctan\!\dfrac{y}{x}
             \]
-            Якобиан перехода $(r,\theta) \mapsto (x,y)$ равен $|\det D| = r$, поэтому
-            для обратного преобразования $(x,y) \mapsto (r,\theta)$ имеем
+
+            Для перехода $(r,\theta) \mapsto (x,y)$ нужна следующая матрица:
+            \[
+            \begin{pmatrix}
+                \frac{\partial x}{\partial r} & \frac{\partial x}{\partial \theta} \\
+                \frac{\partial y}{\partial r} & \frac{\partial y}{\partial \theta}
+            \end{pmatrix} =
+            \begin{pmatrix}
+                \cos \theta & -r \sin \theta \\
+                \sin \theta & r \cos \theta
+            \end{pmatrix} = D
+            \]
+            \[
+            \det D = r(\cos^2 x + \sin^2 x) = r\]
+
+            Поэтому для обратного преобразования $(x,y) \mapsto (r,\theta)$ имеем
             \[
                 \big|\det Dg^{-1}(x,y)\big| = \frac{1}{r}.
             \]
-            
-            По формуле:
+
+            По формуле, так как $g$ -- диффеоморфизм:
             \[
                 p_{X,Y}(x,y) = p_{R,\Theta}(r(x,y), \theta(x,y)) \cdot \left|\det Dg^{-1}(x,y)\right|.
             \]
             
-            Подставим $r = \sqrt{x^2 + y^2}$:
+            Замена переменных:
             \[
-                \begin{aligned}
-                    p_{X,Y}(x,y)
-                    &= \frac{1}{2\pi} \cdot \frac{r}{\sigma^2} \exp\!\left(-\frac{r^2}{2\sigma^2}\right) \cdot \frac{1}{r} \\
-                    &= \frac{1}{2\pi\sigma^2} \exp\!\left(-\frac{r^2}{2\sigma^2}\right)
-                    = \frac{1}{2\pi\sigma^2} \exp\!\left(-\frac{x^2 + y^2}{2\sigma^2}\right),
-                \end{aligned}
+            \begin{aligned}
+            p_{X,Y}(x,y)
+            &= p_{R,\Theta}\bigl(r(x,y),\theta(x,y)\bigr)\cdot\Bigl|\det D\bigl(g^{-1}\bigr)(x,y)\Bigr|\\[6pt]
+            &= \frac{1}{2\pi}\cdot\frac{r}{\sigma^2}\exp\!\Bigl(-\frac{r^2}{2\sigma^2}\Bigr)\cdot\frac{1}{r}
+            = \frac{1}{2\pi\sigma^2}\exp\!\Bigl(-\frac{x^2+y^2}{2\sigma^2}\Bigr)
+            \end{aligned}
             \]
-            для всех $(x,y) \in R^2$.
+
+
             \[
                 \begin{aligned}
                     p_X(x)
