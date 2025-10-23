@@ -291,6 +291,7 @@
             Введём события \( A_i = \{X = i\}, B_i = \{Y = i\}, i \geq 0 \). Известно, что для любых \( i \geq 0, j \geq 0 \) события \( A_i \) и \( B_j \) -- независимы, при этом
             \[ P(X = i) = e^{-\lambda} \frac{\lambda^i}{i!}, \lambda > 0, i \geq 0, \]
             \[ P(Y = j) = e^{-\mu} \frac{\mu^j}{j!}, \mu > 0, i \geq 0. \]
+            
             Требуется найти \( P(X = i | X + Y = j) \).
         
         \subsection*{Решение}
@@ -309,6 +310,7 @@
             
             По условию:
             \[P(X = k) = e^{-\lambda} \frac{\lambda^k}{k!}, \; P(Y = j - k) = e^{-\mu} \frac{\mu^{j-k}}{(j-k)!}, \]
+            
             тогда
             \[ P(X + Y = j) = e^{-(\lambda + \mu)} \sum_{k=0}^{j} \frac{\lambda^k \mu^{j-k}}{k!(j-k)!} \]
             
@@ -371,6 +373,7 @@
                     -e^{-t^3} \Big|_{0}^{x} =
                     1 - e^{-x^3}
                 \]
+                
                 То есть:
                 \[
                     F(x) = \begin{cases}
@@ -386,6 +389,7 @@
                     \ln(1 - F(x)) = -x^3 \leftrightarrow
                     x = (-\ln(1 - F(x)))^{1/3}
                 \]
+                
                 Тогда обратная функция распределения:
                 \[
                     F^{-1}(y) = (-\ln(1 - y))^{1/3}, \quad y \in [0, 1)
@@ -503,24 +507,29 @@
             \noindent 2. Найдём функцию распределения:
             \[F_X(x) = \int_{-\pi/2}^{x}\frac{1}{2}\cos t dt = \frac{1}{2} (\sin x + 1). \]
             
-            Тогда: \[ \boxed{F_X (x)= \begin{cases}
-                                          0, & x \leq -\frac{\pi}{2} \\
-                                          \frac{1}{2} (\sin x + 1), & -\frac{\pi}{2} < x < \frac{\pi}{2} \\
-                                          1, & x \geq \frac{\pi}{2}
-    \end{cases}}\]
+            Тогда:
+            \[ \boxed{F_X (x)= \begin{cases}
+                                   0, & x \leq -\frac{\pi}{2} \\
+                                   \frac{1}{2} (\sin x + 1), & -\frac{\pi}{2} < x < \frac{\pi}{2} \\
+                                   1, & x \geq \frac{\pi}{2}
+            \end{cases}}\]
             
             \noindent 3. Математическое ожидание:
             \[E[X] = \int_{-\infty}^{\infty} x \cdot p_X(x) dx\]
             \[E[X] = \int_{-\pi/2}^{\pi/2} x \cdot \frac{1}{2} \cos x dx\]
+            
             Подынтегральная функция является нечётной, а интеграл по симметричному промежутку от нечётной функции равен нулю:
             \[\boxed{E[X] = 0}\]
             
             Дисперсия:
             \[D[X] = E[X^2] - (E[X])^2\]
+            
             Так как $E[X] = 0$, то $D[X] = E[X^2]$.
             \[E[X^2] = \int_{-\pi/2}^{\pi/2} x^2 \cdot \frac{1}{2} \cos x dx\]
+            
             Так как подынтегральная функция - чётная: \[E[X^2] = 2 \cdot \frac{1}{2} \int_{0}^{\pi/2} x^2 \cos x dx = \int_{0}^{\pi/2} x^2 \cos x dx\]
-            \\ Два раза интегрируем по частям:
+            
+            Два раза интегрируем по частям:
             \begin{gather*}
                 u = x^2, dv = \cos x dx \implies du = 2x dx, v = \sin x \\
                 \int_{0}^{\pi/2} x^2 \cos x dx = x^2 \sin x dx |^{\pi/2}_{0} - \int_{0}^{\pi/2} 2x \sin x dx = \\
@@ -531,6 +540,7 @@
                 \int_{0}^{\pi/2} x \sin x dx = -x \cos x |^{\pi/2}_0 - \int_{0}^{\pi/2} (-\cos x) dx = \\
                 = (-\frac{\pi}{2} \cdot 0 - 0) + (\sin x |^{\pi/2}_0) = 0 + (\sin \frac{\pi}{2} - \sin 0) = 1 - 0 = 1
             \end{gather*}
+            
             Подставим обратно:
             \[\boxed{D[X] = E[X^2] = \frac{\pi}{4} - 2 \cdot 1 = \frac{\pi}{4} - 2}\]
             
@@ -544,6 +554,7 @@
             $$
             med = \arg\min_a E[|X - a|] = \arg\min_a \int_{-\infty}^{\infty} |x - a| p_X(x) dx
             $$
+            
             Для данной плотности $p_X(x) = \frac{1}{2} \cos x \cdot ind\left(x \in \left[-\frac{\pi}{2}, \frac{\pi}{2}\right]\right)$, функция для минимизации:
             $$
             g(a) = \int_{-\pi/2}^{\pi/2} |x - a| \cdot \frac{1}{2} \cos x dx
@@ -573,16 +584,18 @@
                 &   \sin a = 0 \\
                 & \sin a = 0
             \end{align*}
+            
             Единственное решение для $a \in \left[-\frac{\pi}{2}, \frac{\pi}{2}\right]$:
             $$
             a = 0
             $$
+            
             Следовательно:
             $$
             \boxed{med = 0}
             $$
             
-            Коэффициент асиммерии:
+            Коэффициент асимметрии:
             $$
             As = \frac{E[(X - E[X])^3]}{\sigma_X^3}
             $$
@@ -602,6 +615,7 @@
             $$
             \boxed{As = \frac{0}{\sigma_X^3} = 0}
             $$
+            
             То есть, распределение является строго симметричным.
             
             Коэффициент эксцесса:
@@ -632,6 +646,7 @@
             -x^m \cos x |^{\pi/2}_{0} +
             m \int_{0}^{\pi/2} x^{m-1} \cos x dx
             $$
+            
             Заметим $cos(\pi/2) = 0$ и для $m \ge 1: x^m = 0$:
             $$
             J_{m} = m I_{m-1}
@@ -641,6 +656,7 @@
             \left(\frac{\pi}{2}\right)^n - n J_{n-1} =
             \left(\frac{\pi}{2}\right)^n - n (n - 1) I_{n-2}
             $$
+            
             Вычислим $I_4$:
             \begin{gather*}
                 I_0 =
@@ -751,55 +767,56 @@
                 \qquad r \ge 0, \ \theta \in [0, 2\pi).
             \]
             
-            
-            Переход к $(X,Y)$.
-            
-            Пусть
+            Перейдём к $(X,Y)$. Пусть:
             \[
                 x = r\cos\theta, \qquad y = r\sin\theta.
             \]
-            Тогда обратное преобразование задаётся формулами:
+            
+            Заметим, что это является переходом между декартовыми и полярными координатами. Из известной \href{https://ru.wikipedia.org/wiki/%D0%9F%D0%BE%D0%BB%D1%8F%D1%80%D0%BD%D0%B0%D1%8F_%D1%81%D0%B8%D1%81%D1%82%D0%B5%D0%BC%D0%B0_%D0%BA%D0%BE%D0%BE%D1%80%D0%B4%D0%B8%D0%BD%D0%B0%D1%82#%D0%AF%D0%BA%D0%BE%D0%B1%D0%B8%D0%B0%D0%BD%D1%8B}{информации} можно сделать вывод, что отображение $g: (r,\theta) \mapsto (x,y)$ является диффеоморфизмом.
+            
+            Обратное преобразование задаётся формулами:
             \[
                 r = \sqrt{x^2 + y^2},
                 \qquad
-                \theta = \arctan\!\dfrac{y}{x}
+                \theta = \begin{cases}
+                             \arctan\frac{y}{x}, & x > 0 \\
+                             \arctan\frac{y}{x} + \pi, & x < 0, y \ge 0 \\
+                             \arctan\frac{y}{x} - \pi, & x < 0, y < 0 \\
+                             \frac{\pi}{2}, & x = 0, y > 0 \\
+                             -\frac{\pi}{2}, & x = 0, y < 0
+                \end{cases}
             \]
-
-            Для перехода $(r,\theta) \mapsto (x,y)$ нужна следующая матрица:
+            
+            Матрица Якоби $(r,\theta) \mapsto (x,y)$ и соответственно якобиан:
             \[
-            \begin{pmatrix}
-                \frac{\partial x}{\partial r} & \frac{\partial x}{\partial \theta} \\
-                \frac{\partial y}{\partial r} & \frac{\partial y}{\partial \theta}
-            \end{pmatrix} =
-            \begin{pmatrix}
-                \cos \theta & -r \sin \theta \\
-                \sin \theta & r \cos \theta
-            \end{pmatrix} = D
+                Dg(r,\theta) =
+                \begin{pmatrix}
+                    \frac{\partial x}{\partial r} & \frac{\partial x}{\partial \theta} \\
+                    \frac{\partial y}{\partial r} & \frac{\partial y}{\partial \theta}
+                \end{pmatrix} =
+                \begin{pmatrix}
+                    \cos \theta & -r \sin \theta \\
+                    \sin \theta & r \cos \theta
+                \end{pmatrix}
             \]
             \[
-            \det D = r(\cos^2 x + \sin^2 x) = r\]
-
-            Поэтому для обратного преобразования $(x,y) \mapsto (r,\theta)$ имеем
+                \det Dg(r,\theta) = r(\cos^2 x + \sin^2 x) = r
+            \]
+            
+            Для обратного преобразования $(x,y) \mapsto (r,\theta)$ имеем
             \[
                 \big|\det Dg^{-1}(x,y)\big| = \frac{1}{r}.
             \]
-
-            По формуле, так как $g$ -- диффеоморфизм:
-            \[
-                p_{X,Y}(x,y) = p_{R,\Theta}(r(x,y), \theta(x,y)) \cdot \left|\det Dg^{-1}(x,y)\right|.
-            \]
             
-            Замена переменных:
+            Тогда по заданной из условия задачи формуле для плотности совместного распределения $(X,Y)$:
             \[
-            \begin{aligned}
-            p_{X,Y}(x,y)
-            &= p_{R,\Theta}\bigl(r(x,y),\theta(x,y)\bigr)\cdot\Bigl|\det D\bigl(g^{-1}\bigr)(x,y)\Bigr|\\[6pt]
-            &= \frac{1}{2\pi}\cdot\frac{r}{\sigma^2}\exp\!\Bigl(-\frac{r^2}{2\sigma^2}\Bigr)\cdot\frac{1}{r}
-            = \frac{1}{2\pi\sigma^2}\exp\!\Bigl(-\frac{x^2+y^2}{2\sigma^2}\Bigr)
-            \end{aligned}
+                \begin{gathered}
+                    p_{X,Y}(x,y) =
+                    p_{R,\Theta}\bigl(r(x,y),\theta(x,y)\bigr)\cdot\Bigl|\det D\bigl(g^{-1}\bigr)(x,y)\Bigr| = \\
+                    = \frac{1}{2\pi}\cdot\frac{r}{\sigma^2}\exp\!\Bigl(-\frac{r^2}{2\sigma^2}\Bigr)\cdot\frac{1}{r} =
+                    \frac{1}{2\pi\sigma^2}\exp\!\Bigl(-\frac{x^2+y^2}{2\sigma^2}\Bigr)
+                \end{gathered}
             \]
-
-
             \[
                 \begin{aligned}
                     p_X(x)
@@ -835,6 +852,7 @@
                 Y \text{ имеет плотность }
                 p_Y(y)=\frac{1}{\sqrt{2\pi}\sigma} e^{-y^2/(2\sigma^2)}.
             \]
+            
             Следовательно,
             \[
                 E[X] = E[Y] = 0, \qquad
@@ -881,6 +899,7 @@
             \[
                 \sum_{\text{известные}} p_{ij} = 0.99.
             \]
+            
             Используя условие $\sum_{i,j} p_{ij} = 1$, получаем:
             \[
                 1 = 0.99 + p(Y=-2, X=28),
@@ -911,6 +930,7 @@
                     P(Y=-2) &= 0.11 + 0.05 + 0.03 + 0.01 = 0.20.
                 \end{aligned}
             \]
+            
             Проверка: $0.20 + 0.16 + 0.17 + 0.27 + 0.20 = 1.$
             
             \noindent 3. Распределение $U = (-1)^{X^2 + Y^4}$
@@ -980,6 +1000,7 @@
                 \qquad
                 \mathrm{Ex}_X = \frac{E[(X - E[X])^4]}{\sigma_X^4} - 3.
             \]
+            
             Вычислим $E[(X - E[X])^3]$:
             \[
                 \begin{aligned}
@@ -1008,7 +1029,9 @@
             \[
                 \boxed{\mathrm{As}_X = 0.61, \quad \mathrm{Ex}_X = -0.86.}
             \]
+            
             \noindent 5. Характеристики $Y$
+            
             \[
                 \begin{aligned}
                     E[Y] &= (-9)\cdot0.20 + (-8)\cdot0.16 + (-5)\cdot0.17 + (-3)\cdot0.27 + (-2)\cdot0.20 = -5.14,\\
@@ -1079,26 +1102,34 @@
             \[
                 p(Y=-9,X=-8)=0.04,
             \]
+            
             а произведение
             \[
                 P(Y=-9)\,P(X=-8)=0.20\cdot0.34=0.068.
             \]
+            
             Так как \(0.04 \neq 0.068\), равенство \(p_{ij}=P(Y=y_i)P(X=x_j)\) нарушено уже для этой ячейки.
             
             \noindent 2) Ячейка $(Y=-3,\;X=28)$:
+            
             \[
                 p(Y=-3,X=28)=0.08,
             \]
+            
             а
+            
             \[
                 P(Y=-3)\,P(X=28)=0.27\cdot0.15=0.0405,
             \]
+            
             и снова \(0.08 \neq 0.0405\).
             
             \noindent Вывод. Поскольку существует по крайней мере одна пара \((y_i,x_j)\), для которой
+            
             \[
                 p(Y=y_i,X=x_j)\neq P(Y=y_i)P(X=x_j),
             \]
+            
             величины $X$ и $Y$ \emph{не являются независимыми}.
             
             \[
