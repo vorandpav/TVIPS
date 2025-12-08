@@ -1,0 +1,11 @@
+\babel@toc {russian}{}\relax 
+\contentsline {section}{Задача 1}{3}{section*.1}%
+\contentsline {section}{Задача 2}{4}{section*.2}%
+\contentsline {section}{Задача 3}{7}{section*.3}%
+\contentsline {section}{Задача 4}{9}{section*.4}%
+\contentsline {paragraph}{Идея метода}{11}{paragraph*.5}%
+\contentsline {paragraph}{Алгоритм}{12}{paragraph*.6}%
+\contentsline {paragraph}{Обоснование}{12}{paragraph*.7}%
+\contentsline {section}{Задача 5}{13}{section*.8}%
+\contentsline {section}{Задача 6}{21}{section*.9}%
+\contentsline {section}{Задача 7}{24}{section*.10}%
